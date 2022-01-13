@@ -8,11 +8,9 @@ const contactSchema = new Schema({
     type: String,
     required: true
   },
-  phoneNumber: {
-    work: String,
-    home: String,
-    mobile: String,
-    other: String
+  phone: {
+    type: String,
+    required: true
   },
   emailAddress: String,
   mailingAddress: String,

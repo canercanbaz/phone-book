@@ -144,4 +144,32 @@ describe('Contacts Controller', function () {
       expect(body.msg).toMatch('name is required');
     }, TIMEOUT);
   });
+
+  describe('GET /api/contacts/:contactId', function () {
+    it('returns a contact by id', async () => {
+      const newContact = await Contact.create({ name: 'Test Contact 1', phone: '+901111111111' });
+
+      const response = await request(app)
+        .get(`/api/contacts/${newContact._id}`)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', new RegExp('json'));
+
+      const { body: contact } = response;
+
+      expect(contact.name).toBeDefined();
+      expect(contact.name).toEqual('Test Contact 1');
+    }, TIMEOUT);
+
+    it('throws an error if contact is not found', async () => {
+      const response = await request(app)
+        .get('/api/contacts/61e068579a5f74ff3d265dc5')  // not found in db
+        .set('Accept', 'application/json')
+        .expect('Content-Type', new RegExp('json'));
+
+      const { body, error } = response;
+
+      expect(error.status).toBe(500);
+      expect(body.msg).toMatch('Contact is not found');
+    }, TIMEOUT);
+  });
 });

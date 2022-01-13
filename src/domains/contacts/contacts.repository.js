@@ -12,6 +12,12 @@ class ContactsRepository {
     const contact = await Contact.create(payload);
     return _.toPlainObject(contact);
   }
+
+  async getById(contactId) {
+    const contact = await Contact.findById(contactId);
+    if (!contact) throw new Error('Contact is not found');
+    return _.toPlainObject(contact);
+  }
 }
 
 module.exports = new ContactsRepository();

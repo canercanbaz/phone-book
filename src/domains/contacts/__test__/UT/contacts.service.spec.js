@@ -81,4 +81,22 @@ describe('Contacts Service', function () {
       }
     });
   });
+
+  describe('getContactById', function () {
+    it('returns a contact by id', async () => {
+      const newContact = await Contact.create({ name: 'Test Contact 1', phone: '+901111111111' });
+
+      const contact = await contactsService.getContactById(newContact._id);
+      expect(contact.name).toBeDefined();
+      expect(contact.name).toEqual('Test Contact 1');
+    });
+
+    it('throws an error if contact is not found', async () => {
+      try {
+        await contactsService.getContactById("61e068579a5f74ff3d265dc5"); // not found in db
+      } catch (error) {
+        expect(error.name).toMatch('Error');
+      }
+    });
+  });
 });

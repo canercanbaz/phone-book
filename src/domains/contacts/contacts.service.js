@@ -27,6 +27,10 @@ class ContactsService {
 
     return contactsRepository.create(payload);
   }
+
+  async getContactById(contactId) {
+    return contactsRepository.getById(contactId);
+  }
 }
 
 module.exports = new ContactsService();
