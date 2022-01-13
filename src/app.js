@@ -1,9 +1,9 @@
 'use strict';
 
 const express = require('express');
-const mongoClient = require('./database/mongodb.client');
 const { loadEnv } = require('./configs/environment');
 loadEnv();
+const mongoClient = require('./database/mongodb.client');
 const app = express();
 
 app.use(express.json());

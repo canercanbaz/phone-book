@@ -3,7 +3,7 @@
 const contactsRepository = require('./contacts.repository');
 
 class ContactsService {
-  async getAllContacts(sort = 'asc', offset = 0, limit = 20) {
+  async getAllContacts({ sort = 'asc', offset = 0, limit = 20 } = {}) {
     if (sort && sort !== 'asc' && sort !== 'desc') {
       throw new Error('sort parameter should be either `asc` or `desc`');
     }
