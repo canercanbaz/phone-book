@@ -31,6 +31,14 @@ class ContactsService {
   async getContactById(contactId) {
     return contactsRepository.getById(contactId);
   }
+
+  async updateContactById(contactId, payload) {
+    if (_.isEmpty(payload.name)) {
+      throw new Error('name is required');
+    }
+
+    return contactsRepository.updateById(contactId, payload);
+  }
 }
 
 module.exports = new ContactsService();

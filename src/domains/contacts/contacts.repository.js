@@ -18,6 +18,12 @@ class ContactsRepository {
     if (!contact) throw new Error('Contact is not found');
     return _.toPlainObject(contact);
   }
+
+  async updateById(contactId, payload) {
+    const contact = await Contact.findByIdAndUpdate(contactId, payload, { new: true });
+    if (!contact) throw new Error('Contact is not found');
+    return _.toPlainObject(contact);
+  }
 }
 
 module.exports = new ContactsRepository();

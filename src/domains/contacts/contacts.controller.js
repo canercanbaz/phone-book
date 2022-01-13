@@ -34,6 +34,16 @@ class ContactsController {
       return response.serverError(res, { msg: error.message });
     }
   }
+
+  async updateContactById(req, res) {
+    try {
+      const { body, params } = req;
+      const contact = await contactService.updateContactById(params.contactId, body);
+      response.success(res, contact);
+    } catch (error) {
+      return response.serverError(res, { msg: error.message });
+    }
+  }
 }
 
 module.exports = new ContactsController();
