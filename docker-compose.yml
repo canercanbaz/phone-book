@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  phone-book:
+    container_name: phone-book
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/phone-book
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
