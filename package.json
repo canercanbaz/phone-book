@@ -4,12 +4,15 @@
   "description": "A web service that allows to achieve CRUD operations on a phone book",
   "main": "server.js",
   "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "start:dev": "NODE_ENV=development node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Caner Canbaz",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^11.0.0",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mongoose": "^6.1.6"
   }
 }
