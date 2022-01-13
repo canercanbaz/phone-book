@@ -1,4 +1,5 @@
 'use strict';
+const _ = require('lodash');
 
 const contactsRepository = require('./contacts.repository');
 
@@ -17,6 +18,14 @@ class ContactsService {
     }
 
     return contactsRepository.getAll(sort, offset, limit);
+  }
+
+  async createContact(payload) {
+    if (_.isEmpty(payload.name)) {
+      throw new Error('name is required');
+    }
+
+    return contactsRepository.create(payload);
   }
 }
 

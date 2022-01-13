@@ -65,4 +65,20 @@ describe('Contacts Service', function () {
       expect(contactsBySortDescending[0].name).toEqual('Test Contact 2');
     });
   });
+
+  describe('createContact', function () {
+    it('creates a new contact', async () => {
+      const contact = await contactsService.createContact({ name: 'Test Contact 1', phone: '+901111111111' });
+      expect(contact.name).toBeDefined();
+      expect(contact.name).toEqual('Test Contact 1');
+    });
+
+    it('throws an error if name is not provided', async () => {
+      try {
+        await contactsService.createContact({ phone: '+901111111111' });
+      } catch (error) {
+        expect(error.name).toMatch('Error');
+      }
+    });
+  });
 });

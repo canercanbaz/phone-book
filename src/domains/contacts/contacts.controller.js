@@ -14,6 +14,16 @@ class ContactsController {
       return response.serverError(res, { msg: error.message });
     }
   }
+
+  async createContact(req, res) {
+    try {
+      const payload = req.body;
+      const contact = await contactService.createContact(payload);
+      response.success(res, contact);
+    } catch (error) {
+      return response.serverError(res, { msg: error.message });
+    }
+  }
 }
 
 module.exports = new ContactsController();

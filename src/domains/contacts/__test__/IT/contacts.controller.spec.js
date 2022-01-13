@@ -111,4 +111,37 @@ describe('Contacts Controller', function () {
       expect(responseBySortDescending.body[0].name).toEqual('Test Contact 2');
     }, TIMEOUT);
   });
+
+  describe('POST /api/contacts', function () {
+    it('creates a new contact', async () => {
+      const response = await request(app)
+        .post('/api/contacts')
+        .send({
+          name: 'Test Contact 1',
+          phone: '+901111111111'
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', new RegExp('json'));
+
+      const { body: contact } = response;
+
+      expect(contact.name).toBeDefined();
+      expect(contact.name).toEqual('Test Contact 1');
+    }, TIMEOUT);
+
+    it('throws an error if name is not provided', async () => {
+      const response = await request(app)
+        .post('/api/contacts')
+        .send({
+          phone: '+901111111111'
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', new RegExp('json'));
+
+      const { body, error } = response;
+
+      expect(error.status).toBe(500);
+      expect(body.msg).toMatch('name is required');
+    }, TIMEOUT);
+  });
 });
