@@ -1,13 +1,10 @@
 'use strict';
 
+const Contacts = require('./contacts.model');
+
 class ContactsRepository {
-  async getAllContacts() {
-    return [{
-      name: 'Caner',
-      phoneNumber: '+901111111111',
-      email: 'canercanbazz@gmail.com',
-      address: 'Turkey'
-    }];
+  async getAll(sort, offset, limit) {
+    return Contacts.find({}).skip(offset).limit(limit).sort({ _id: sort }).lean();
   }
 }
 
