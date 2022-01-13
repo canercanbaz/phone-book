@@ -5,6 +5,7 @@ package-lock.json
 .DS_Store
 .env
 .env.test
+.env.dev
 
 npm-debug.log
 node_modules
