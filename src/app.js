@@ -8,4 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Load routes
+require('./routes')(app);
+
 module.exports = app;
