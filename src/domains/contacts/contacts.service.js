@@ -25,6 +25,10 @@ class ContactsService {
       throw new Error('name is required');
     }
 
+    if (_.isEmpty(payload.phone)) {
+      throw new Error('phone is required');
+    }
+
     return contactsRepository.create(payload);
   }
 
