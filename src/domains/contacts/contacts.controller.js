@@ -44,6 +44,16 @@ class ContactsController {
       return response.serverError(res, { msg: error.message });
     }
   }
+
+  async deleteContactById(req, res) {
+    try {
+      const { params } = req;
+      const contact = await contactService.deleteContactById(params.contactId);
+      response.success(res, contact);
+    } catch (error) {
+      return response.serverError(res, { msg: error.message });
+    }
+  }
 }
 
 module.exports = new ContactsController();

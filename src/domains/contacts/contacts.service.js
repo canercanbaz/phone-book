@@ -39,6 +39,10 @@ class ContactsService {
 
     return contactsRepository.updateById(contactId, payload);
   }
+
+  async deleteContactById(contactId) {
+    return contactsRepository.deleteById(contactId);
+  }
 }
 
 module.exports = new ContactsService();

@@ -113,9 +113,27 @@ describe('Contacts Service', function () {
 
     it('throws an error if contact is not found', async () => {
       try {
-        await contactsService.updateContactById("61e068579a5f74ff3d265dc5", { 
+        await contactsService.updateContactById("61e068579a5f74ff3d265dc5", {
           name: 'Test Contact 2'
         });
+      } catch (error) {
+        expect(error.name).toMatch('Error');
+      }
+    });
+  });
+
+  describe('deleteContactById', function () {
+    it('deletes a contact by id', async () => {
+      const newContact = await Contact.create({ name: 'Test Contact 1', phone: '+901111111111' });
+
+      const contact = await contactsService.deleteContactById(newContact._id);
+      expect(contact.name).toBeDefined();
+      expect(contact.name).toEqual('Test Contact 1');
+    });
+
+    it('throws an error if contact is not found', async () => {
+      try {
+        await contactsService.deleteContactById("61e068579a5f74ff3d265dc5");
       } catch (error) {
         expect(error.name).toMatch('Error');
       }

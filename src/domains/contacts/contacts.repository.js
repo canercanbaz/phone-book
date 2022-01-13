@@ -24,6 +24,12 @@ class ContactsRepository {
     if (!contact) throw new Error('Contact is not found');
     return _.toPlainObject(contact);
   }
+
+  async deleteById(contactId) {
+    const contact = await Contact.findByIdAndDelete(contactId);
+    if (!contact) throw new Error('Contact is not found');
+    return _.toPlainObject(contact);
+  }
 }
 
 module.exports = new ContactsRepository();
